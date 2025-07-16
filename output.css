@@ -185,6 +185,9 @@
   .flex {
     display: flex;
   }
+  .hidden {
+    display: none;
+  }
   .min-h-screen {
     min-height: 100vh;
   }
@@ -355,14 +358,14 @@ body {
 }
 .currentCard {
   border-radius: var(--radius-xl);
-  background-color: #4b4b4b;
-  height: calc(var(--spacing) * 40);
+  background-color: #a4d9ff90;
+  height: calc(var(--spacing) * 60);
   width: 100%;
   padding: calc(var(--spacing) * 2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 @property --tw-border-style {
   syntax: "*";

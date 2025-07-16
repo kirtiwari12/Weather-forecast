@@ -14,10 +14,10 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <!-- <body
+  <body
     class="bg-[url(/img/clear.gif)] bg-cover bg-center min-h-screen text-amber-50"
-  > -->
-  <body>
+  >
+    <!-- <body> -->
     <!-- main div -->
     <div>
       <!-- header -->
@@ -92,63 +92,69 @@
         >
           <!-- LONDON WALA DIV -->
           <section id="currentWeather">
-            <h3 class="font-bold">London(2025)</h3>
-            <div
-              class="flex flex-row flex-wrap border border-solid border-white"
-            >
-              <div class="currentCardWrapper">
-                <div class="currentCard">
-                  <p>Temperature</p>
-                  <p><i class="fa-xl fa-solid fa-temperature-empty"></i></p>
+            <!-- no result message -->
+            <div id="noResult" class="text-4xl">
+              Search for a location to see its weather
+            </div>
 
-                  <p class="temp"></p>
-                </div>
-              </div>
-              <div class="currentCardWrapper">
-                <div class="currentCard">
-                  <p>Wind</p>
-                  <p><i class="fa-xl fa-solid fa-wind"></i></p>
-                  <p class="wind"></p>
-                </div>
-              </div>
+            <div id="currentResult" class="currentResult hidden">
+              <section>
+                <h3 class="font-bold">London(2025)</h3>
+                <div class="flex flex-row flex-wrap">
+                  <div class="currentCardWrapper">
+                    <div class="currentCard">
+                      <p>Temperature</p>
+                      <p>
+                        <i class="fa-2xl fa-solid fa-temperature-empty"></i>
+                      </p>
 
-              <div class="currentCardWrapper">
-                <div class="currentCard">
-                  <p>Humidity</p>
-                  <p>
-                    <i class="fa-xl fa-solid fa-droplet"></i>
-                  </p>
-                  <p class="humidity"></p>
-                </div>
-              </div>
+                      <p class="temp"></p>
+                    </div>
+                  </div>
+                  <div class="currentCardWrapper">
+                    <div class="currentCard">
+                      <p>Wind</p>
+                      <p><i class="fa-2xl fa-solid fa-wind"></i></p>
+                      <p class="wind"></p>
+                    </div>
+                  </div>
 
-              <div class="currentCardWrapper">
-                <div class="currentCard">
-                  <p>Sunrise/Sunset</p>
-                  <p>
-                    <i class="fa-xl fa-solid fa-droplet"></i>
-                  </p>
-                  <p class="sunrise"></p>
-                  <p class="sunset"></p>
+                  <div class="currentCardWrapper">
+                    <div class="currentCard">
+                      <p>Humidity</p>
+                      <p>
+                        <i class="fa-2xl fa-solid fa-droplet"></i>
+                      </p>
+                      <p class="humidity"></p>
+                    </div>
+                  </div>
+
+                  <div class="currentCardWrapper">
+                    <div class="currentCard">
+                      <p>Sunrise/Sunset</p>
+                      <p>
+                        <i class="fa-2xl fa-solid fa-sun"></i>
+                        <i class="fa-2xl fa-solid fa-moon ml-2"></i>
+                      </p>
+                      <p class="sunrise/sunset"></p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- WEEKLY WALA DIV -->
+              <div class="border border-solid border-green-500">
+                <h3 class="font-bold">This week</h3>
+                <div>
+                  <p>(2025)</p>
+                  <!-- <i>icon</i> -->
+                  <p><i class="fa-solid fa-temperature-empty"></i>Temp:</p>
+                  <p><i class="fa-solid fa-wind"></i>Wind:</p>
+                  <p><i class="fa-solid fa-droplet"></i>Humidity:</p>
                 </div>
               </div>
-              <!-- 
-              <p>Wind: <span class="wind"></span></p>
-              <p>Humidity: <span class="humidity"></span></p> -->
             </div>
           </section>
-
-          <!-- WEEKLY WALA DIV -->
-          <div class="border border-solid border-green-500">
-            <h3 class="font-bold">This week</h3>
-            <div>
-              <p>(2025)</p>
-              <!-- <i>icon</i> -->
-              <p><i class="fa-solid fa-temperature-empty"></i>Temp:</p>
-              <p><i class="fa-solid fa-wind"></i>Wind:</p>
-              <p><i class="fa-solid fa-droplet"></i>Humidity:</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ body {
 }
 
 .currentCard {
-  @apply bg-[#4b4b4b] rounded-xl;
-  @apply p-2 h-40 w-full;
-  @apply flex flex-col justify-center items-center;
+  @apply bg-[#a4d9ff90] rounded-xl;
+  @apply p-2 h-60 w-full;
+  @apply flex flex-col justify-between items-center;
 }

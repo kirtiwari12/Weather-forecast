@@ -11,6 +11,14 @@ const unitsMap = {
   },
 };
 
+function getTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  return `${hours}:${minutes}`;
+}
+
 async function getWeatherData() {
   const location = document.getElementById("userLocation").value;
   const tempUnit = document.getElementById("tempUnit").value;
@@ -26,8 +34,10 @@ async function getWeatherData() {
   const details = {
     name: res.name,
     temp: res.main.temp + unitsMap[units].temp,
-    humidity: res.main.humidity,
+    humidity: res.main.humidity + "%",
     wind: res.wind.speed + unitsMap[units].wind,
+    sunrise: getTime(res.sys.sunrise),
+    sunset: getTime(res.sys.sunset),
   };
 
   const currentWeatherDiv = document.getElementById("currentWeather");
@@ -35,4 +45,10 @@ async function getWeatherData() {
   currentWeatherDiv.getElementsByClassName("wind")[0].innerHTML = details.wind;
   currentWeatherDiv.getElementsByClassName("humidity")[0].innerHTML =
     details.humidity;
+  currentWeatherDiv.getElementsByClassName("sunrise/sunset")[0].innerHTML =
+    details.sunrise + "/" + details.sunset;
+
+  // hide no result message
+  document.getElementById("noResult").classList.add("hidden");
+  document.getElementById("currentResult").classList.remove("hidden");
 }
