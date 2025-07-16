@@ -90,12 +90,26 @@
           class="flex flex-col flex-auto gap-10 p-5 bg-[#3f3d5673] rounded-lg"
         >
           <!-- LONDON WALA DIV -->
-          <section>
-            <div id="currentWeather" class="border border-solid border-white">
-              <h3 class="font-bold">London(2025)</h3>
-              <p>Temperature: <span class="temp"></span></p>
+          <section id="currentWeather">
+            <h3 class="font-bold">London(2025)</h3>
+            <div
+              class="flex flex-row gap-1 flex-wrap border border-solid border-white"
+            >
+              <div class="flex border flex-1/2 border-red-500 h-50">
+                <p>Temperature: <span class="temp"></span></p>
+              </div>
+              <div class="flex border flex-1/2 border-red-500 h-50">
+                <p>Wind: <span class="temp"></span></p>
+              </div>
+              <div class="flex border flex-1/2 border-red-500 h-50">
+                <p>Humidity: <span class="temp"></span></p>
+              </div>
+              <div class="flex border flex-1/2 border-red-500 h-50">
+                <p>Pressure: <span class="temp"></span></p>
+              </div>
+              <!-- 
               <p>Wind: <span class="wind"></span></p>
-              <p>Humidity: <span class="humidity"></span></p>
+              <p>Humidity: <span class="humidity"></span></p> -->
             </div>
           </section>
 
