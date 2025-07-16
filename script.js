@@ -30,5 +30,9 @@ async function getWeatherData() {
     wind: res.wind.speed + unitsMap[units].wind,
   };
 
-  document.getElementsByClassName("tempValue")[0].innerHTML = details.temp;
+  const currentWeatherDiv = document.getElementById("currentWeather");
+  currentWeatherDiv.getElementsByClassName("temp")[0].innerHTML = details.temp;
+  currentWeatherDiv.getElementsByClassName("wind")[0].innerHTML = details.wind;
+  currentWeatherDiv.getElementsByClassName("humidity")[0].innerHTML =
+    details.humidity;
 }
