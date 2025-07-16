@@ -4,3 +4,14 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
+.currentCardWrapper {
+  @apply flex flex-1/2;
+  @apply p-3;
+}
+
+.currentCard {
+  @apply bg-[#4b4b4b] rounded-xl;
+  @apply p-2 h-40 w-full;
+  @apply flex flex-col justify-center items-center;
+}
