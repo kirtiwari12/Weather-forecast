@@ -40,3 +40,13 @@ main {
   @apply flex justify-center items-center;
   @apply text-lg lg:text-4xl h-full text-center;
 }
+
+/* Forecast Section */
+.forecastWrapper {
+  @apply flex flex-row gap-3 flex-wrap justify-center;
+}
+.forecastCard {
+  @apply flex flex-col justify-center items-center;
+  @apply p-3 bg-[#fff89771] min-w-40;
+  @apply rounded-2xl;
+}

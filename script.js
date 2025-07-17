@@ -1,4 +1,5 @@
 const apiKey = "1444e1ddb7eefe262deb2ce6d16666b4";
+const dayMap = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const unitsMap = {
   metric: {
@@ -106,6 +107,52 @@ async function getWeatherData() {
   // hide no result message
   hideNoResult();
   document.getElementById("currentResult").classList.remove("hidden");
+
+  // collect forecast data
+  const forecastData = [];
+  for (let i = 7; i < res.list.length; i += 8) {
+    const dayData = res.list[i];
+
+    const dayIndex = new Date(dayData.dt * 1000).getDay();
+    const nextDay = {
+      dayName: dayMap[dayIndex],
+      temp: dayData.main.temp + unitsMap[units].temp,
+      humidity: dayData.main.humidity + "%",
+      wind: dayData.wind.speed + unitsMap[units].wind,
+    };
+
+    forecastData.push(nextDay);
+  }
+
+  // show forecast cards
+  const forecastWrapper = document.getElementById("forecastWrapper");
+
+  for (let data of forecastData) {
+    const forecardCard = document.createElement("div");
+    forecardCard.classList.add("forecastCard");
+
+    // day name
+    const day = document.createElement("p");
+    day.innerHTML = data.dayName;
+    forecardCard.appendChild(day);
+
+    // temp
+    const temp = document.createElement("p");
+    temp.innerHTML = `<i class="fa-solid fa-temperature-empty"></i> ${data.temp}`;
+    forecardCard.appendChild(temp);
+
+    // wind
+    const wind = document.createElement("p");
+    wind.innerHTML = `<i class="fa-solid fa-wind"></i> ${data.wind}`;
+    forecardCard.appendChild(wind);
+
+    // humidity
+    const humidity = document.createElement("p");
+    humidity.innerHTML = `<i class="fa-solid fa-droplet"></i> ${data.humidity}`;
+    forecardCard.appendChild(humidity);
+
+    forecastWrapper.appendChild(forecardCard);
+  }
 }
 
 function onLoad() {
