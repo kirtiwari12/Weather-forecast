@@ -55,43 +55,31 @@ function showRecentSearch() {
   recentSearchWrapper.classList.remove("hidden");
 }
 
-function updateLocationInURL(location) {
-  const params = new URLSearchParams(window.location.search);
-  params.set("location", location);
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
+function updateLocationInURL(params) {
+  const searchParams = new URLSearchParams(params);
+  const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
   window.history.replaceState({}, "", newUrl);
 }
 
-async function getWeatherData() {
-  const location = document.getElementById("userLocation").value.trim();
+async function getWeatherData(lat, lon) {
+  const isCurrentLocation = lat !== undefined && lon !== undefined;
+  const locationFromInput = document
+    .getElementById("userLocation")
+    .value.trim();
 
-  if (!location) {
+  if (!locationFromInput && !isCurrentLocation) {
     return;
   }
 
-  const savedRecentSearches = getRecentSearches();
-  //add new search to recent search list options if not already exists
-  if (
-    savedRecentSearches.every(
-      (search) => search.toLowerCase() !== location.toLowerCase()
-    )
-  ) {
-    // add to recent search list
-    saveLocationInRecent(location);
-
-    const recentSelect = document.getElementById("recentSearch");
-    const newOption = document.createElement("option");
-    newOption.value = location;
-    newOption.innerHTML = location;
-    newOption.classList.add("text-black");
-    recentSelect.appendChild(newOption);
-  }
-
   const tempUnit = document.getElementById("tempUnit").value;
-
   const units = tempUnit === "C" ? "metric" : "imperial";
+  let baseUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&units=${units}&`;
 
-  const baseUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&units=${units}&q=${location}`;
+  if (isCurrentLocation) {
+    baseUrl += `lat=${lat}&lon=${lon}`;
+  } else {
+    baseUrl += `q=${locationFromInput}`;
+  }
 
   const res = await (await fetch(baseUrl)).json();
 
@@ -103,7 +91,10 @@ async function getWeatherData() {
     sunrise: getTime(res.city.sunrise),
     sunset: getTime(res.city.sunset),
   };
-  updateLocationInURL(location);
+
+  if (isCurrentLocation) {
+    document.getElementById("userLocation").value = currentDetails.name;
+  }
 
   const currentResultDiv = document.getElementById("currentResult");
   currentResultDiv.querySelector("h3").innerHTML = currentDetails.name;
@@ -179,6 +170,45 @@ async function getWeatherData() {
 
     forecastWrapper.appendChild(forecardCard);
   }
+
+  updateLocationInURL({ location: currentDetails.name });
+
+  const savedRecentSearches = getRecentSearches();
+  //add new search to recent search list options if not already exists
+  if (
+    savedRecentSearches.every(
+      (search) => search.toLowerCase() !== currentDetails.name.toLowerCase()
+    )
+  ) {
+    // add to recent search list
+    saveLocationInRecent(currentDetails.name);
+
+    const recentSelect = document.getElementById("recentSearch");
+    const newOption = document.createElement("option");
+    newOption.value = currentDetails.name;
+    newOption.innerHTML = currentDetails.name;
+    newOption.classList.add("text-black");
+    recentSelect.appendChild(newOption);
+  }
+}
+
+function getCurrentLocation() {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      getWeatherData(lat, lon);
+    },
+    (error) => {
+      console.error("Location error:", error);
+      alert("Unable to get location. Please allow access.");
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0,
+    }
+  );
 }
 
 function onLoad() {
@@ -206,11 +236,22 @@ function onLoad() {
     }
   });
 
+  // add event onclick listener to use current location button
+  document
+    .getElementById("currentLocationBtn")
+    .addEventListener("click", getCurrentLocation);
+
   // check if URL has the city, then fetch city data
-  const location = new URLSearchParams(window.location.search).get("location");
+  const searchParams = new URLSearchParams(window.location.search);
+  const location = searchParams.get("location");
+  const lat = searchParams.get("lat");
+  const lon = searchParams.get("lon");
   if (location) {
     document.getElementById("userLocation").value = location;
     getWeatherData();
+  }
+  if (lat && lon) {
+    getWeatherData(lat, lon);
   }
 }
 onLoad();
