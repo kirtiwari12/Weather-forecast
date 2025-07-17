@@ -51,6 +51,6 @@ main {
 }
 .forecastCard {
   @apply flex flex-col justify-center items-center;
-  @apply p-3 bg-[#fff89771] min-w-40;
+  @apply p-3 min-w-40;
   @apply rounded-2xl;
 }

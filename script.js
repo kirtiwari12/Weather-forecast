@@ -2,15 +2,15 @@ const apiKey = "1444e1ddb7eefe262deb2ce6d16666b4";
 const dayMap = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const weatherMap = {
-  clear: { icon: "fa-sun" },
-  clouds: { icon: "fa-cloud" },
-  rain: { icon: "fa-cloud-showers-heavy" },
-  snow: { icon: "fa-snowflake" },
-  fog: { icon: "fa-smog" },
-  night: { icon: "fa-moon" },
+  clear: { icon: "fa-sun", bgColor: "#fffb1ca8" },
+  clouds: { icon: "fa-cloud", bgColor: "#009fff73" },
+  rain: { icon: "fa-cloud-showers-heavy", bgColor: "#597c9ebd" },
+  snow: { icon: "fa-snowflake", bgColor: "#ffffff73" },
+  fog: { icon: "fa-smog", bgColor: "#e5e5e5c7" },
+  night: { icon: "fa-moon", bgColor: "#00000073" },
   thunderstorm: { icon: "fa-cloud-bolt" },
-  haze: { icon: "fa-smog" },
-  mist: { icon: "fa-cloud-rain" },
+  haze: { icon: "fa-smog", bgColor: "#e5e5e5c7" },
+  mist: { icon: "fa-cloud-rain", bgColor: "#88c4ff9c" },
 };
 
 const unitsMap = {
@@ -142,8 +142,12 @@ async function getWeatherData() {
   forecastWrapper.replaceChildren();
 
   for (let data of forecastData) {
+    const weatherMapData = weatherMap[data.weather];
     const forecardCard = document.createElement("div");
-    forecardCard.classList.add("forecastCard");
+    forecardCard.classList.add(
+      "forecastCard",
+      `bg-[${weatherMapData.bgColor}]`
+    );
 
     // day name
     const day = document.createElement("p");
@@ -153,7 +157,7 @@ async function getWeatherData() {
     //icon
     const iconDiv = document.createElement("div");
     const icon = document.createElement("i");
-    const iconName = weatherMap[data.weather].icon ?? "fa-sun";
+    const iconName = weatherMapData.icon ?? "fa-sun";
     icon.classList.add("fa-solid", iconName);
     iconDiv.appendChild(icon);
     forecardCard.appendChild(iconDiv);

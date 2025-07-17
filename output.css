@@ -430,7 +430,6 @@ main {
   align-items: center;
   justify-content: center;
   min-width: calc(var(--spacing) * 40);
-  background-color: #fff89771;
   padding: calc(var(--spacing) * 3);
   border-radius: var(--radius-2xl);
 }
