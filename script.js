@@ -1,6 +1,18 @@
 const apiKey = "1444e1ddb7eefe262deb2ce6d16666b4";
 const dayMap = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+const weatherMap = {
+  clear: { icon: "fa-sun" },
+  clouds: { icon: "fa-cloud" },
+  rain: { icon: "fa-cloud-showers-heavy" },
+  snow: { icon: "fa-snowflake" },
+  fog: { icon: "fa-smog" },
+  night: { icon: "fa-moon" },
+  thunderstorm: { icon: "fa-cloud-bolt" },
+  haze: { icon: "fa-smog" },
+  mist: { icon: "fa-cloud-rain" },
+};
+
 const unitsMap = {
   metric: {
     temp: "°C",
@@ -119,6 +131,7 @@ async function getWeatherData() {
       temp: dayData.main.temp + unitsMap[units].temp,
       humidity: dayData.main.humidity + "%",
       wind: dayData.wind.speed + unitsMap[units].wind,
+      weather: dayData.weather[0].main.toLowerCase(),
     };
 
     forecastData.push(nextDay);
@@ -136,6 +149,14 @@ async function getWeatherData() {
     const day = document.createElement("p");
     day.innerHTML = data.dayName;
     forecardCard.appendChild(day);
+
+    //icon
+    const iconDiv = document.createElement("div");
+    const icon = document.createElement("i");
+    const iconName = weatherMap[data.weather].icon ?? "fa-sun";
+    icon.classList.add("fa-solid", iconName);
+    iconDiv.appendChild(icon);
+    forecardCard.appendChild(iconDiv);
 
     // temp
     const temp = document.createElement("p");
