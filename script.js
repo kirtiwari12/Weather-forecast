@@ -44,8 +44,23 @@ function saveLocationInRecent(location) {
 }
 
 function hideNoResult() {
-  document.getElementById("noResult").classList.add("hidden");
-  document.getElementById("noResult").classList.remove("noResultWrapper");
+  const noResultDiv = document.getElementById("noResult");
+  noResultDiv.classList.add("hidden");
+  noResultDiv.classList.remove("noResultWrapper");
+  document.getElementById("currentResult").classList.remove("hidden");
+}
+
+function handleError(error) {
+  console.log("API failed:", error);
+  showErrorMessage();
+}
+
+function showErrorMessage() {
+  const noResultDiv = document.getElementById("noResult");
+  noResultDiv.classList.remove("hidden");
+  noResultDiv.classList.add("noResultWrapper");
+  noResultDiv.getElementsByTagName("h3")[0].innerHTML = "Location not found";
+  document.getElementById("currentResult").classList.add("hidden");
 }
 
 function showRecentSearch() {
@@ -81,7 +96,17 @@ async function getWeatherData(lat, lon) {
     baseUrl += `q=${locationFromInput}`;
   }
 
-  const res = await (await fetch(baseUrl)).json();
+  let res;
+  try {
+    res = await (await fetch(baseUrl)).json();
+    if (res.cod !== "200") {
+      handleError();
+      return;
+    }
+  } catch (error) {
+    handleError();
+    return;
+  }
 
   const currentDetails = {
     name: res.city.name,
@@ -109,7 +134,6 @@ async function getWeatherData(lat, lon) {
 
   // hide no result message
   hideNoResult();
-  document.getElementById("currentResult").classList.remove("hidden");
 
   // collect forecast data
   const forecastData = [];
@@ -193,6 +217,7 @@ async function getWeatherData(lat, lon) {
 }
 
 function getCurrentLocation() {
+  document.getElementById("recentSearch").value = "";
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const lat = position.coords.latitude;
@@ -209,6 +234,11 @@ function getCurrentLocation() {
       maximumAge: 0,
     }
   );
+}
+
+function handleSearchBtnClick() {
+  document.getElementById("recentSearch").value = "";
+  getWeatherData();
 }
 
 function onLoad() {
@@ -235,6 +265,11 @@ function onLoad() {
       getWeatherData();
     }
   });
+
+  // add event listener to search when search button is clicked
+  document
+    .getElementById("searchBtn")
+    .addEventListener("click", handleSearchBtnClick);
 
   // add event onclick listener to use current location button
   document
