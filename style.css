@@ -42,6 +42,10 @@ main {
 }
 
 /* Forecast Section */
+.forecastSection {
+  @apply my-3 text-center;
+}
+
 .forecastWrapper {
   @apply flex flex-row gap-3 flex-wrap justify-center;
 }

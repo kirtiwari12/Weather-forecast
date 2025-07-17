@@ -413,6 +413,10 @@ main {
     line-height: var(--tw-leading, var(--text-4xl--line-height));
   }
 }
+.forecastSection {
+  margin-block: calc(var(--spacing) * 3);
+  text-align: center;
+}
 .forecastWrapper {
   display: flex;
   flex-direction: row;

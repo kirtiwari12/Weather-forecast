@@ -126,6 +126,7 @@ async function getWeatherData() {
 
   // show forecast cards
   const forecastWrapper = document.getElementById("forecastWrapper");
+  forecastWrapper.replaceChildren();
 
   for (let data of forecastData) {
     const forecardCard = document.createElement("div");
@@ -171,8 +172,13 @@ function onLoad() {
   }
 
   recentSelect.addEventListener("change", (e) => {
-    document.getElementById("userLocation").value = e.target.value;
-    getWeatherData();
+    const textInput = document.getElementById("userLocation");
+    const recentValue = e.target.value;
+
+    if (textInput.value.trim() !== recentValue) {
+      textInput.value = recentValue;
+      getWeatherData();
+    }
   });
 
   // check if URL has the city, then fetch city data
