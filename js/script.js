@@ -2,15 +2,50 @@ const apiKey = "1444e1ddb7eefe262deb2ce6d16666b4";
 const dayMap = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const weatherMap = {
-  clear: { icon: "fa-sun", bgColor: "#fffb1ca8" },
-  clouds: { icon: "fa-cloud", bgColor: "#009fff73" },
-  rain: { icon: "fa-cloud-showers-heavy", bgColor: "#597c9ebd" },
-  snow: { icon: "fa-snowflake", bgColor: "#ffffff73" },
-  fog: { icon: "fa-smog", bgColor: "#e5e5e5c7" },
-  night: { icon: "fa-moon", bgColor: "#00000073" },
-  thunderstorm: { icon: "fa-cloud-bolt" },
-  haze: { icon: "fa-smog", bgColor: "#e5e5e5c7" },
-  mist: { icon: "fa-cloud-rain", bgColor: "#88c4ff9c" },
+  clear: {
+    icon: "fa-sun",
+    bgColor: "#fffb1ca8",
+    bgImage: "clear.gif",
+  },
+  clouds: {
+    icon: "fa-cloud",
+    bgColor: "#009fff73",
+    bgImage: "clouds.gif",
+  },
+  rain: {
+    icon: "fa-cloud-showers-heavy",
+    bgColor: "#597c9ebd",
+    bgImage: "rain.gif",
+  },
+  snow: {
+    icon: "fa-snowflake",
+    bgColor: "#ffffff73",
+    bgImage: "snow.gif",
+  },
+  fog: {
+    icon: "fa-smog",
+    bgColor: "#e5e5e5c7",
+    bgImage: "fog.gif",
+  },
+  night: {
+    icon: "fa-moon",
+    bgColor: "#00000073",
+    bgImage: "night.gif",
+  },
+  thunderstorm: {
+    icon: "fa-cloud-bolt",
+    bgImage: "thunderstorm.gif",
+  },
+  haze: {
+    icon: "fa-smog",
+    bgColor: "#e5e5e5c7",
+    bgImage: "haze.gif",
+  },
+  mist: {
+    icon: "fa-cloud-rain",
+    bgColor: "#88c4ff9c",
+    bgImage: "mist.gif",
+  },
 };
 
 const unitsMap = {
@@ -56,6 +91,7 @@ function handleError(error) {
 }
 
 function showErrorMessage() {
+  document.getElementsByTagName("body")[0].style.backgroundImage = "";
   const noResultDiv = document.getElementById("noResult");
   noResultDiv.classList.remove("hidden");
   noResultDiv.classList.add("noResultWrapper");
@@ -115,7 +151,14 @@ async function getWeatherData(lat, lon) {
     wind: res.list[0].wind.speed + unitsMap[units].wind,
     sunrise: getTime(res.city.sunrise),
     sunset: getTime(res.city.sunset),
+    weather: res.list[0].weather[0].main.toLowerCase(),
   };
+
+  document.getElementsByTagName(
+    "body"
+  )[0].style.backgroundImage = `url(../img/${
+    weatherMap[currentDetails.weather].bgImage
+  })`;
 
   if (isCurrentLocation) {
     document.getElementById("userLocation").value = currentDetails.name;
