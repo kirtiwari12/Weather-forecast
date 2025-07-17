@@ -173,12 +173,6 @@
   }
 }
 @layer utilities {
-  .mt-20 {
-    margin-top: calc(var(--spacing) * 20);
-  }
-  .mt-28 {
-    margin-top: calc(var(--spacing) * 28);
-  }
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
   }
@@ -187,6 +181,12 @@
   }
   .hidden {
     display: none;
+  }
+  .h-fit {
+    height: fit-content;
+  }
+  .h-full {
+    height: 100%;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -206,23 +206,11 @@
   .flex-row {
     flex-direction: row;
   }
-  .flex-wrap {
-    flex-wrap: wrap;
-  }
-  .items-center {
-    align-items: center;
-  }
-  .justify-center {
-    justify-content: center;
-  }
   .gap-0\.5 {
     gap: calc(var(--spacing) * 0.5);
   }
   .gap-3 {
     gap: calc(var(--spacing) * 3);
-  }
-  .gap-5 {
-    gap: calc(var(--spacing) * 5);
   }
   .gap-10 {
     gap: calc(var(--spacing) * 10);
@@ -275,15 +263,8 @@
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
-  .px-50 {
-    padding-inline: calc(var(--spacing) * 50);
-  }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
-  }
-  .text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
   }
   .text-lg {
     font-size: var(--text-lg);
@@ -351,10 +332,55 @@ body {
   margin: 0px;
   padding: 0px;
 }
+main {
+  padding-bottom: calc(var(--spacing) * 10);
+}
+.headerClass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: calc(var(--spacing) * 28);
+  font-size: var(--text-4xl);
+  line-height: var(--tw-leading, var(--text-4xl--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+}
+.contentClass {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--spacing) * 5);
+  @media (width >= 64rem) {
+    flex-direction: row;
+  }
+  margin-top: calc(var(--spacing) * 20);
+  padding-inline: calc(var(--spacing) * 5);
+  @media (width >= 48rem) {
+    padding-inline: calc(var(--spacing) * 20);
+  }
+}
+.currentCardsParent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing) * 3);
+  @media (width >= 48rem) {
+    flex-direction: row;
+  }
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 0);
+  }
+}
 .currentCardWrapper {
   display: flex;
-  flex: calc(1/2 * 100%);
-  padding: calc(var(--spacing) * 3);
+  @media (width >= 48rem) {
+    flex: calc(1/2 * 100%);
+  }
+  padding-inline: calc(var(--spacing) * 0);
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 3);
+  }
 }
 .currentCard {
   border-radius: var(--radius-xl);
@@ -366,6 +392,27 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+.cityName {
+  padding-inline: calc(var(--spacing) * 0);
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
+  @media (width >= 48rem) {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+}
+.noResultWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  font-size: var(--text-lg);
+  line-height: var(--tw-leading, var(--text-lg--line-height));
+  @media (width >= 64rem) {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
 }
 @property --tw-border-style {
   syntax: "*";

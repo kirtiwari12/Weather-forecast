@@ -18,21 +18,20 @@
     class="bg-[url(/img/clear.gif)] bg-cover bg-center min-h-screen text-amber-50"
   >
     <!-- <body> -->
+
     <!-- main div -->
-    <div>
+    <main>
       <!-- header -->
-      <header
-        class="flex justify-center items-center mt-28 text-4xl font-bold text-white"
-      >
+      <header class="headerClass">
         <h1 class="text-[#2C3E50]">
           The Sky Cast <i class="fa-solid fa-cloud-sun-rain"></i>
         </h1>
       </header>
 
       <!-- Content -->
-      <div class="mt-20 flex flex-row gap-5 justify-center px-50">
+      <div class="contentClass">
         <!--  left div-->
-        <div class="flex flex-col gap-3 p-5 bg-[#3f3d5673] rounded-lg">
+        <div class="flex flex-col gap-3 p-5 bg-[#3f3d5673] rounded-lg h-fit">
           <h2 class="font-bold">
             Search City <i class="fa-solid fa-magnifying-glass"></i>
           </h2>
@@ -71,17 +70,16 @@
             </button>
           </div>
 
-          <div class="dropdown">
+          <div class="dropdown recentSearchWrapper hidden">
             <p class="text-lg">Recent searches</p>
             <select
+              id="recentSearch"
               name="Recent city"
-              class="w-full border border-solid border-white rounded-xl px-2 py-0.5 inset-shadow-sm inset-shadow-blue-200"
+              class="cursor-pointer w-full border border-solid border-white rounded-xl px-2 py-0.5 inset-shadow-sm inset-shadow-blue-200"
             >
               <option class="text-black" value="">
                 Select a recent location
               </option>
-              <option class="text-black" value="delhi">Delhi</option>
-              <option class="text-black" value="surat">Surat</option>
             </select>
           </div>
         </div>
@@ -91,16 +89,16 @@
           class="flex flex-col flex-auto gap-10 p-5 bg-[#3f3d5673] rounded-lg"
         >
           <!-- LONDON WALA DIV -->
-          <section id="currentWeather">
+          <section id="currentWeather" class="h-full">
             <!-- no result message -->
-            <div id="noResult" class="text-4xl">
-              Search for a location to see its weather
+            <div id="noResult" class="noResultWrapper">
+              <h3>Search for a location to see its weather</h3>
             </div>
 
             <div id="currentResult" class="currentResult hidden">
               <section>
-                <h3 class="font-bold">London(2025)</h3>
-                <div class="flex flex-row flex-wrap">
+                <h3 class="cityName">London(2025)</h3>
+                <div class="currentCardsParent">
                   <div class="currentCardWrapper">
                     <div class="currentCard">
                       <p>Temperature</p>
@@ -143,21 +141,21 @@
               </section>
 
               <!-- WEEKLY WALA DIV -->
-              <div class="border border-solid border-green-500">
+              <!-- <div class="border border-solid border-green-500">
                 <h3 class="font-bold">This week</h3>
                 <div>
                   <p>(2025)</p>
-                  <!-- <i>icon</i> -->
+                  <i>icon</i>
                   <p><i class="fa-solid fa-temperature-empty"></i>Temp:</p>
                   <p><i class="fa-solid fa-wind"></i>Wind:</p>
                   <p><i class="fa-solid fa-droplet"></i>Humidity:</p>
                 </div>
-              </div>
+              </div> -->
             </div>
           </section>
         </div>
       </div>
-    </div>
+    </main>
   </body>
 
   <script src="script.js"></script>
