@@ -3,7 +3,7 @@ body {
   font-size: 125%;
   margin: 0px;
   padding: 0px;
-  @apply bg-[url(./img/clear.gif)] bg-cover bg-center;
+  @apply bg-[url(../img/clear.gif)] bg-cover bg-center;
   @apply min-h-screen text-amber-50;
 }
 main {

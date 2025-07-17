@@ -241,7 +241,7 @@ body {
   font-size: 125%;
   margin: 0px;
   padding: 0px;
-  background-image: url(./img/clear.gif);
+  background-image: url(../img/clear.gif);
   background-size: cover;
   background-position: center;
   min-height: 100vh;
