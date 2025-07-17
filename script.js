@@ -42,6 +42,13 @@ function showRecentSearch() {
   recentSearchWrapper.classList.remove("hidden");
 }
 
+function updateLocationInURL(location) {
+  const params = new URLSearchParams(window.location.search);
+  params.set("location", location);
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, "", newUrl);
+}
+
 async function getWeatherData() {
   const location = document.getElementById("userLocation").value.trim();
 
@@ -83,6 +90,7 @@ async function getWeatherData() {
     sunrise: getTime(res.city.sunrise),
     sunset: getTime(res.city.sunset),
   };
+  updateLocationInURL(location);
 
   const currentResultDiv = document.getElementById("currentResult");
   currentResultDiv.querySelector("h3").innerHTML = currentDetails.name;
@@ -119,5 +127,12 @@ function onLoad() {
     document.getElementById("userLocation").value = e.target.value;
     getWeatherData();
   });
+
+  // check if URL has the city, then fetch city data
+  const location = new URLSearchParams(window.location.search).get("location");
+  if (location) {
+    document.getElementById("userLocation").value = location;
+    getWeatherData();
+  }
 }
 onLoad();
