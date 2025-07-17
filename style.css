@@ -3,19 +3,68 @@ body {
   font-size: 125%;
   margin: 0px;
   padding: 0px;
+  @apply bg-[url(./img/clear.gif)] bg-cover bg-center;
+  @apply min-h-screen text-amber-50;
 }
 main {
   @apply pb-10;
 }
 
+/* header styles */
 .headerClass {
   @apply flex justify-center items-center;
   @apply mt-28 text-4xl font-bold text-white;
+}
+.headerClass h1 {
+  @apply text-[#2C3E50];
 }
 
 .contentClass {
   @apply flex flex-col lg:flex-row gap-5 justify-center;
   @apply mt-20 px-5 md:px-20;
+}
+
+/* ------------------ left section styles ------------------ */
+.leftSection {
+  @apply flex flex-col gap-3;
+  @apply p-5 h-fit bg-[#3f3d5673] rounded-lg;
+}
+
+.tempSelect {
+  @apply border-1 border-white rounded-xl;
+  @apply inset-shadow-sm inset-shadow-blue-200;
+  @apply ml-2;
+}
+
+.searchBtn,
+.currentLocationBtn {
+  @apply border border-white rounded-2xl;
+  @apply transition duration-500;
+  @apply bg-[#2C3E50] hover:bg-[#19242e];
+  @apply shadow-sm hover:shadow-white;
+  @apply w-full py-0.5 text-white cursor-pointer;
+}
+
+.recentSearchSelect {
+  @apply border border-solid border-white rounded-xl;
+  @apply inset-shadow-sm inset-shadow-blue-200;
+  @apply w-full px-2 py-0.5 cursor-pointer;
+}
+
+/* ------------------ right section styles ------------------ */
+.rightSection {
+  @apply flex flex-col flex-auto gap-10;
+  @apply p-5 bg-[#3f3d5673] rounded-lg;
+}
+
+/* current weather section styles */
+.cityName {
+  @apply font-bold px-0 md:px-3;
+}
+
+.noResultWrapper {
+  @apply flex justify-center items-center;
+  @apply text-lg lg:text-4xl h-full text-center;
 }
 
 .currentCardsParent {
@@ -31,14 +80,6 @@ main {
   @apply bg-[#a4d9ff90] rounded-xl;
   @apply p-2 h-60 w-full;
   @apply flex flex-col justify-between items-center;
-}
-.cityName {
-  @apply font-bold px-0 md:px-3;
-}
-
-.noResultWrapper {
-  @apply flex justify-center items-center;
-  @apply text-lg lg:text-4xl h-full text-center;
 }
 
 /* Forecast Section */

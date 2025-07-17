@@ -14,24 +14,18 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body
-    class="bg-[url(/img/clear.gif)] bg-cover bg-center min-h-screen text-amber-50"
-  >
-    <!-- <body> -->
-
+  <body>
     <!-- main div -->
     <main>
       <!-- header -->
       <header class="headerClass">
-        <h1 class="text-[#2C3E50]">
-          The Sky Cast <i class="fa-solid fa-cloud-sun-rain"></i>
-        </h1>
+        <h1>The Sky Cast <i class="fa-solid fa-cloud-sun-rain"></i></h1>
       </header>
 
       <!-- Content -->
       <div class="contentClass">
         <!--  left div-->
-        <div class="flex flex-col gap-3 p-5 bg-[#3f3d5673] rounded-lg h-fit">
+        <div class="leftSection">
           <h2 class="font-bold">
             Search City <i class="fa-solid fa-magnifying-glass"></i>
           </h2>
@@ -45,38 +39,23 @@
               placeholder="Enter City Name"
             />
 
-            <select
-              name="tempUnit"
-              id="tempUnit"
-              class="change ml-2 border-1 border-white rounded-xl inset-shadow-sm inset-shadow-blue-200"
-            >
+            <select name="tempUnit" id="tempUnit" class="tempSelect">
               <option value="C" class="text-black">°C</option>
               <option value="F" class="text-black">°F</option>
             </select>
           </div>
-          <div>
-            <button
-              id="searchBtn"
-              class="bg-[#2C3E50] w-full text-white rounded-2xl transition duration-500 hover:bg-[#19242e] border border- py-0.5 cursor-pointer shadow-sm hover:shadow-white"
-            >
-              Search
-            </button>
-          </div>
-          <div>
-            <button
-              id="currentLocationBtn"
-              class="bg-[#2C3E50] w-full text-white rounded-2xl transition duration-500 hover:bg-[#19242e] border border-white py-0.5 cursor-pointer shadow-sm hover:shadow-white"
-            >
-              Use current location
-            </button>
-          </div>
 
-          <div class="dropdown recentSearchWrapper hidden">
+          <button id="searchBtn" class="searchBtn">Search</button>
+          <button id="currentLocationBtn" class="currentLocationBtn">
+            Use current location
+          </button>
+
+          <div class="recentSearchWrapper hidden">
             <p class="text-lg">Recent searches</p>
             <select
               id="recentSearch"
               name="Recent city"
-              class="cursor-pointer w-full border border-solid border-white rounded-xl px-2 py-0.5 inset-shadow-sm inset-shadow-blue-200"
+              class="recentSearchSelect"
             >
               <option class="text-black" value="">
                 Select a recent location
@@ -86,10 +65,8 @@
         </div>
 
         <!--  right div-->
-        <div
-          class="flex flex-col flex-auto gap-10 p-5 bg-[#3f3d5673] rounded-lg"
-        >
-          <!-- LONDON WALA DIV -->
+        <div class="rightSection">
+          <!-- Current weather -->
           <section id="currentWeather" class="h-full">
             <!-- no result message -->
             <div id="noResult" class="noResultWrapper">
