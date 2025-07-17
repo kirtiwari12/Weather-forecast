@@ -71,29 +71,29 @@ async function getWeatherData() {
 
   const units = tempUnit === "C" ? "metric" : "imperial";
 
-  const baseUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=${units}&q=${location}`;
+  const baseUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&units=${units}&q=${location}`;
 
   const res = await (await fetch(baseUrl)).json();
 
-  console.log("response", res);
-
-  const details = {
-    name: res.name,
-    temp: res.main.temp + unitsMap[units].temp,
-    humidity: res.main.humidity + "%",
-    wind: res.wind.speed + unitsMap[units].wind,
-    sunrise: getTime(res.sys.sunrise),
-    sunset: getTime(res.sys.sunset),
+  const currentDetails = {
+    name: res.city.name,
+    temp: res.list[0].main.temp + unitsMap[units].temp,
+    humidity: res.list[0].main.humidity + "%",
+    wind: res.list[0].wind.speed + unitsMap[units].wind,
+    sunrise: getTime(res.city.sunrise),
+    sunset: getTime(res.city.sunset),
   };
 
   const currentResultDiv = document.getElementById("currentResult");
-  currentResultDiv.querySelector("h3").innerHTML = details.name;
-  currentResultDiv.getElementsByClassName("temp")[0].innerHTML = details.temp;
-  currentResultDiv.getElementsByClassName("wind")[0].innerHTML = details.wind;
+  currentResultDiv.querySelector("h3").innerHTML = currentDetails.name;
+  currentResultDiv.getElementsByClassName("temp")[0].innerHTML =
+    currentDetails.temp;
+  currentResultDiv.getElementsByClassName("wind")[0].innerHTML =
+    currentDetails.wind;
   currentResultDiv.getElementsByClassName("humidity")[0].innerHTML =
-    details.humidity;
+    currentDetails.humidity;
   currentResultDiv.getElementsByClassName("sunrise/sunset")[0].innerHTML =
-    details.sunrise + "/" + details.sunset;
+    currentDetails.sunrise + "/" + currentDetails.sunset;
 
   // hide no result message
   hideNoResult();
@@ -105,7 +105,6 @@ function onLoad() {
   const recentSelect = document.getElementById("recentSearch");
   if (recentList.length > 0) {
     showRecentSearch();
-    console.log(recentList);
 
     recentList.forEach((term) => {
       const newOption = document.createElement("option");
