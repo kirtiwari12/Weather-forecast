@@ -125,6 +125,12 @@ async function getWeatherData(lat, lon) {
     return;
   }
   if (locationFromInput && !isCurrentLocation) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const locationFromUrl = searchParams.get("location");
+    // to avoid unnecessary api calls with same location
+    if (locationFromInput.toLowerCase() === locationFromUrl.toLowerCase()) {
+      return;
+    }
     updateLocationInURL({ location: locationFromInput });
   }
 
