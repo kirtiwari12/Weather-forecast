@@ -160,9 +160,7 @@ async function getWeatherData(lat, lon) {
     weather: res.list[0].weather[0].main.toLowerCase(),
   };
 
-  document.getElementsByTagName(
-    "body"
-  )[0].style.backgroundImage = `url(../img/${
+  document.getElementsByTagName("body")[0].style.backgroundImage = `url(./img/${
     weatherMap[currentDetails.weather].bgImage
   })`;
 
