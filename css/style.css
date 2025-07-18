@@ -1,4 +1,21 @@
 @import "tailwindcss";
+:root {
+  --bg-temp: #ff7171b3;
+  --bg-wind: #ffffffb3;
+  --bg-humid: #86e5ffb3;
+  --bg-sun: #ffff78b3;
+
+  --weather-clear: #fffb1ca8;
+  --weather-clouds: #009fff73;
+  --weather-rain: #597c9ebd;
+  --weather-snow: #ffffff73;
+  --weather-fog: #e5e5e5c7;
+  --weather-night: #00000073;
+  --weather-thunderstorm: #00000073;
+  --weather-haze: #e5e5e5c7;
+  --weather-mist: #88c4ff9c;
+}
+
 body {
   font-size: 125%;
   margin: 0px;
@@ -33,7 +50,7 @@ main {
 .tempSelect {
   @apply border-1 border-white rounded-xl;
   @apply inset-shadow-sm inset-shadow-blue-200;
-  @apply ml-2;
+  @apply ml-2 cursor-pointer;
 }
 
 .searchBtn,
@@ -73,13 +90,28 @@ main {
 
 .currentCardWrapper {
   @apply flex md:flex-1/2;
-  @apply px-0 md:p-3;
+  @apply px-0 md:p-5;
 }
 
 .currentCard {
   @apply bg-[#a4d9ff90] rounded-xl;
-  @apply p-2 h-60 w-full;
+  @apply p-2 h-60 w-full cursor-pointer;
   @apply flex flex-col justify-between items-center;
+  @apply shadow-md shadow-[#ffffffb3];
+  @apply transition duration-150;
+  @apply hover:shadow-lg hover:scale-105;
+}
+.currentCard.tempCard {
+  @apply hover:bg-[var(--bg-temp)];
+}
+.currentCard.windCard {
+  @apply hover:bg-[var(--bg-wind)];
+}
+.currentCard.humidityCard {
+  @apply hover:bg-[var(--bg-humid)];
+}
+.currentCard.sunCard {
+  @apply hover:bg-[var(--bg-sun)];
 }
 
 /* Forecast Section */
@@ -93,5 +125,7 @@ main {
 .forecastCard {
   @apply flex flex-col justify-center items-center;
   @apply p-3 min-w-40;
-  @apply rounded-2xl;
+  @apply rounded-2xl cursor-pointer;
+  @apply transition duration-100;
+  @apply hover:scale-120 shadow-sm hover:shadow-white;
 }

@@ -4,46 +4,47 @@ const dayMap = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const weatherMap = {
   clear: {
     icon: "fa-sun",
-    bgColor: "#fffb1ca8",
+    bgColor: "var(--weather-clear)",
     bgImage: "clear.gif",
   },
   clouds: {
     icon: "fa-cloud",
-    bgColor: "#009fff73",
+    bgColor: "var(--weather-clouds)",
     bgImage: "clouds.gif",
   },
   rain: {
     icon: "fa-cloud-showers-heavy",
-    bgColor: "#597c9ebd",
+    bgColor: "var(--weather-rain)",
     bgImage: "rain.gif",
   },
   snow: {
     icon: "fa-snowflake",
-    bgColor: "#ffffff73",
+    bgColor: "var(--weather-snow)",
     bgImage: "snow.gif",
   },
   fog: {
     icon: "fa-smog",
-    bgColor: "#e5e5e5c7",
+    bgColor: "var(--weather-fog)",
     bgImage: "fog.gif",
   },
   night: {
     icon: "fa-moon",
-    bgColor: "#00000073",
+    bgColor: "var(--weather-night)",
     bgImage: "night.gif",
   },
   thunderstorm: {
     icon: "fa-cloud-bolt",
+    bgColor: "var(--weather-thunderstorm)",
     bgImage: "thunderstorm.gif",
   },
   haze: {
     icon: "fa-smog",
-    bgColor: "#e5e5e5c7",
+    bgColor: "var(--weather-haze)",
     bgImage: "haze.gif",
   },
   mist: {
     icon: "fa-cloud-rain",
-    bgColor: "#88c4ff9c",
+    bgColor: "var(--weather-mist)",
     bgImage: "mist.gif",
   },
 };
@@ -87,15 +88,15 @@ function hideNoResult() {
 
 function handleError(error) {
   console.log("API failed:", error);
-  showErrorMessage();
+  showErrorMessage("Location not found");
 }
 
-function showErrorMessage() {
+function showErrorMessage(message) {
   document.getElementsByTagName("body")[0].style.backgroundImage = "";
   const noResultDiv = document.getElementById("noResult");
   noResultDiv.classList.remove("hidden");
   noResultDiv.classList.add("noResultWrapper");
-  noResultDiv.getElementsByTagName("h3")[0].innerHTML = "Location not found";
+  noResultDiv.getElementsByTagName("h3")[0].innerHTML = message;
   document.getElementById("currentResult").classList.add("hidden");
 }
 
@@ -119,7 +120,12 @@ async function getWeatherData(lat, lon) {
     .value.trim();
 
   if (!locationFromInput && !isCurrentLocation) {
+    updateLocationInURL({});
+    showErrorMessage("Search for a location to see its weather");
     return;
+  }
+  if (locationFromInput && !isCurrentLocation) {
+    updateLocationInURL({ location: locationFromInput });
   }
 
   const tempUnit = document.getElementById("tempUnit").value;
@@ -166,13 +172,13 @@ async function getWeatherData(lat, lon) {
 
   const currentResultDiv = document.getElementById("currentResult");
   currentResultDiv.querySelector("h3").innerHTML = currentDetails.name;
-  currentResultDiv.getElementsByClassName("temp")[0].innerHTML =
+  currentResultDiv.getElementsByClassName("tempValue")[0].innerHTML =
     currentDetails.temp;
-  currentResultDiv.getElementsByClassName("wind")[0].innerHTML =
+  currentResultDiv.getElementsByClassName("windValue")[0].innerHTML =
     currentDetails.wind;
-  currentResultDiv.getElementsByClassName("humidity")[0].innerHTML =
+  currentResultDiv.getElementsByClassName("humidityValue")[0].innerHTML =
     currentDetails.humidity;
-  currentResultDiv.getElementsByClassName("sunrise/sunset")[0].innerHTML =
+  currentResultDiv.getElementsByClassName("sunrise/sunsetValue")[0].innerHTML =
     currentDetails.sunrise + "/" + currentDetails.sunset;
 
   // hide no result message
@@ -299,8 +305,15 @@ function onLoad() {
     });
   }
 
+  const textInput = document.getElementById("userLocation");
+
+  textInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      handleSearchBtnClick();
+    }
+  });
+
   recentSelect.addEventListener("change", (e) => {
-    const textInput = document.getElementById("userLocation");
     const recentValue = e.target.value;
 
     if (textInput.value.trim() !== recentValue) {

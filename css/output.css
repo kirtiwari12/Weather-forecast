@@ -237,6 +237,21 @@
     }
   }
 }
+:root {
+  --bg-temp: #ff7171b3;
+  --bg-wind: #ffffffb3;
+  --bg-humid: #86e5ffb3;
+  --bg-sun: #ffff78b3;
+  --weather-clear: #fffb1ca8;
+  --weather-clouds: #009fff73;
+  --weather-rain: #597c9ebd;
+  --weather-snow: #ffffff73;
+  --weather-fog: #e5e5e5c7;
+  --weather-night: #00000073;
+  --weather-thunderstorm: #00000073;
+  --weather-haze: #e5e5e5c7;
+  --weather-mist: #88c4ff9c;
+}
 body {
   font-size: 125%;
   margin: 0px;
@@ -299,6 +314,7 @@ main {
     --tw-inset-shadow-color: color-mix(in oklab, var(--color-blue-200) var(--tw-inset-shadow-alpha), transparent);
   }
   margin-left: calc(var(--spacing) * 2);
+  cursor: pointer;
 }
 .searchBtn, .currentLocationBtn {
   border-radius: var(--radius-2xl);
@@ -398,7 +414,7 @@ main {
   }
   padding-inline: calc(var(--spacing) * 0);
   @media (width >= 48rem) {
-    padding: calc(var(--spacing) * 3);
+    padding: calc(var(--spacing) * 5);
   }
 }
 .currentCard {
@@ -406,11 +422,65 @@ main {
   background-color: #a4d9ff90;
   height: calc(var(--spacing) * 60);
   width: 100%;
+  cursor: pointer;
   padding: calc(var(--spacing) * 2);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  --tw-shadow-color: #ffffffb3;
+  @supports (color: color-mix(in lab, red, red)) {
+    --tw-shadow-color: color-mix(in oklab, #ffffffb3 var(--tw-shadow-alpha), transparent);
+  }
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  --tw-duration: 150ms;
+  transition-duration: 150ms;
+  &:hover {
+    @media (hover: hover) {
+      --tw-scale-x: 105%;
+      --tw-scale-y: 105%;
+      --tw-scale-z: 105%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+}
+.currentCard.tempCard {
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--bg-temp);
+    }
+  }
+}
+.currentCard.windCard {
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--bg-wind);
+    }
+  }
+}
+.currentCard.humidityCard {
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--bg-humid);
+    }
+  }
+}
+.currentCard.sunCard {
+  &:hover {
+    @media (hover: hover) {
+      background-color: var(--bg-sun);
+    }
+  }
 }
 .forecastSection {
   margin-block: calc(var(--spacing) * 3);
@@ -430,7 +500,31 @@ main {
   justify-content: center;
   min-width: calc(var(--spacing) * 40);
   padding: calc(var(--spacing) * 3);
+  cursor: pointer;
   border-radius: var(--radius-2xl);
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  --tw-duration: 100ms;
+  transition-duration: 100ms;
+  --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  &:hover {
+    @media (hover: hover) {
+      --tw-scale-x: 120%;
+      --tw-scale-y: 120%;
+      --tw-scale-z: 120%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      --tw-shadow-color: #fff;
+      @supports (color: color-mix(in lab, red, red)) {
+        --tw-shadow-color: color-mix(in oklab, var(--color-white) var(--tw-shadow-alpha), transparent);
+      }
+    }
+  }
 }
 @property --tw-border-style {
   syntax: "*";
@@ -510,6 +604,21 @@ main {
   syntax: "*";
   inherits: false;
 }
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -530,6 +639,9 @@ main {
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
       --tw-duration: initial;
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
     }
   }
 }
