@@ -124,7 +124,7 @@ main {
 }
 .forecastCard {
   @apply flex flex-col justify-center items-center;
-  @apply p-3 min-w-40;
+  @apply p-3 min-w-40 w-full md:w-fit;
   @apply rounded-2xl cursor-pointer;
   @apply transition duration-100;
   @apply hover:scale-120 shadow-sm hover:shadow-white;
