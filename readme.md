@@ -1,5 +1,7 @@
 # Weather forecast project
 
+- Repo: https://github.com/kirtiwari12/Weather-forecast
+
 ## This project aims to showcase:
 
 - my understanding of HTML, CSS, Tailwind
